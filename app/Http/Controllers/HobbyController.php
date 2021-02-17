@@ -16,7 +16,10 @@ class HobbyController extends Controller
     {
         $hobbies = Hobby::all();
 
-        dd($hobbies);
+        //dd($hobbies);
+        return view('hobby.index')->with([
+            'hobbies' => $hobbies
+        ]);
     }
 
     /**
@@ -26,7 +29,7 @@ class HobbyController extends Controller
      */
     public function create()
     {
-        //
+        return view('hobby.create');
     }
 
     /**
