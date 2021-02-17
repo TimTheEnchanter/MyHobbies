@@ -10,12 +10,14 @@
                         <form action="/hobby" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="Hobby" name="Hobby" value="{{old('Hobby')}}">
+                                <label for="name">Hobby</label>
+                                <input type="text" class="form-control {{ $errors->has('Hobby') ? 'border-danger' : '' }}" id="Hobby" name="Hobby" value="{{old('Hobby')}}">
+                                <small class="form-text text-danger">{!! $errors->first('Hobby') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" id="Description" name="Description" rows="5">{{old('Description')}}</textarea>
+                                <textarea class="form-control {{ $errors->has('Description') ? 'border-danger' : '' }}" id="Description" name="Description" rows="5">{{old('Description')}}</textarea>
+                                <small class="form-text text-danger">{!! $errors->first('Description') !!}</small>
                             </div>
                             <input class="btn btn-primary mt-4" type="submit" value="Save Hobby">
                         </form>

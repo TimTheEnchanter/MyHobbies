@@ -50,7 +50,11 @@ class HobbyController extends Controller
             'Description' => $request['Description'],
         ]);
         $hobby->save();
-        return $this->index();
+        return $this->index()->with(
+            [
+                'message_success' => "The hobby <b>".$hobby->Hobby."</b> was created.",
+            ]
+        );
     }
 
     /**
