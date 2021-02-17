@@ -78,7 +78,9 @@ class HobbyController extends Controller
      */
     public function edit(Hobby $hobby)
     {
-        //
+        return view('hobby.edit')->with([
+            'hobby' => $hobby
+        ]);
     }
 
     /**
@@ -90,7 +92,21 @@ class HobbyController extends Controller
      */
     public function update(Request $request, Hobby $hobby)
     {
-        //
+        $request->validate([
+            'Hobby' => 'required|min:3',
+            'Description' => 'required|min:5',
+        ]);
+
+        $hobby->update([
+            'Hobby' => $request['Hobby'],
+            'Description' => $request['Description'],
+        ]);
+
+        return $this->index()->with(
+            [
+                'message_success' => "The hobby <b>".$hobby->Hobby."</b> was updated.",
+            ]
+        );
     }
 
     /**
