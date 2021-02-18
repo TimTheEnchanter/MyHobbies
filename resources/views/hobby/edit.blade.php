@@ -12,12 +12,12 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name">Hobby</label>
-                                <input type="text" class="form-control {{ $errors->has('Hobby') ? 'border-danger' : '' }}" id="Hobby" name="Hobby" value="{{ $hobby->Hobby ?? old('Hobby')}}">
+                                <input type="text" class="form-control {{ $errors->has('Hobby') ? 'border-danger' : '' }}" id="Hobby" name="Hobby" value="{{ old('Hobby') ?? $hobby->Hobby }}">
                                 <small class="form-text text-danger">{!! $errors->first('Hobby') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control {{ $errors->has('Description') ? 'border-danger' : '' }}" id="Description" name="Description" rows="5">{{ $hobby->Description ?? old('Description')}}</textarea>
+                                <textarea class="form-control {{ $errors->has('Description') ? 'border-danger' : '' }}" id="Description" name="Description" rows="5">{{ old('Description') ?? $hobby->Description }}</textarea>
                                 <small class="form-text text-danger">{!! $errors->first('Description') !!}</small>
                             </div>
                             <input class="btn btn-primary mt-4" type="submit" value="Update Hobby">
