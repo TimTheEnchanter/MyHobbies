@@ -20,7 +20,9 @@ class HobbyController extends Controller
     public function index()
     {
         //$hobbies = Hobby::all();
-        $hobbies = Hobby::paginate(15);
+        //$hobbies = Hobby::paginate(15);
+
+        $hobbies = Hobby::OrderBy('created_at', 'DESC')->paginate(15);
 
         //dd($hobbies);
         return view('hobby.index')->with([
