@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class HobbyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        $hobbies = Hobby::all();
+        //$hobbies = Hobby::all();
+        $hobbies = Hobby::paginate(15);
 
         //dd($hobbies);
         return view('hobby.index')->with([
@@ -48,6 +54,7 @@ class HobbyController extends Controller
         $hobby = new Hobby([
             'Hobby' => $request['Hobby'],
             'Description' => $request['Description'],
+            'user_id' => auth()->id()
         ]);
         $hobby->save();
         return $this->index()->with(

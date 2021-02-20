@@ -16,6 +16,6 @@ class Hobby extends Model
     }
 
     protected $fillable = [
-        'Hobby', 'Description',
+        'Hobby', 'Description', 'user_id',
     ];
 }
