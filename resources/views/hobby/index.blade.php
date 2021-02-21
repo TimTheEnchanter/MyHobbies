@@ -5,7 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">All Hobbies</div>
+
+                    @isset($filter)
+                    <div class="card-header">Filtered Hobbies by <span class="badge badge-{{$filter->style}}">{{$filter->name}}</span><span class="float-right"><a href="/hobby">Show all Hobbies</a></span></div>
+                    @else
+                        <div class="card-header">All Hobbies</div>
+                    @endisset
 
                     <div class="card-body">
                         <ul class="list-group">
@@ -16,7 +21,7 @@
                                     <a class="btn btn-sm btn-light ml-3" href="/hobby/{{ $hobby->id }}/edit/"><i class="fas fa-edit"></i> Edit Hobby</a>
                                     @endauth
 
-                                    <span class="mx-2">Posted By:{{$hobby->user->name}} ({{$hobby->user->hobbies->count()}} hobbies)</span>
+                                    <span class="mx-2">Posted By:<a href="/user/{{$hobby->user->id}}">{{$hobby->user->name}}</a> ({{$hobby->user->hobbies->count()}} hobbies)</span>
 
                                     @auth
                                     <form class="float-right" action="/hobby/{{ $hobby->id }}" style="display: inline;" method="POST">
@@ -29,7 +34,7 @@
                                     <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                                     <br/>
                                     @foreach($hobby->tags as $tag)
-                                        <a href="#"><span class="badge badge-{{$tag->style}}">{{$tag->name}}</span></a>
+                                        <a href="/hobby/tag/{{ $tag->id }}"><span class="badge badge-{{$tag->style}}">{{$tag->name}}</span></a>
                                     @endforeach
                                 </li>
                             @endforeach
