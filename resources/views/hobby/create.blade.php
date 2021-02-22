@@ -7,12 +7,17 @@
                 <div class="card">
                     <div class="card-header">Create New Hobby</div>
                     <div class="card-body">
-                        <form action="/hobby" method="POST">
+                        <form autocomplete="off" action="/hobby" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Hobby</label>
                                 <input type="text" class="form-control {{ $errors->has('Hobby') ? 'border-danger' : '' }}" id="Hobby" name="Hobby" value="{{old('Hobby')}}">
                                 <small class="form-text text-danger">{!! $errors->first('Hobby') !!}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control {{ $errors->has('image') ? 'border-danger' : '' }}" id="image" name="image" value="">
+                                <small class="form-text text-danger">{!! $errors->first('image') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>

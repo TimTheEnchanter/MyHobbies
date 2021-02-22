@@ -12,13 +12,16 @@
                         <div class="col-md-9">
                             <h2>Hello {{ auth()->user()->name }}</h2>
                             <h5>Your Motto</h5>
-                            <p><p>{{ auth()->user()->motto ?? '' }}</p></p>
+                            <p>{{ auth()->user()->motto ?? '' }}</p>
                             <h5>Your "About Me" -Text</h5>
-                            <p><p>{{ auth()->user()->about_me ?? '' }}</p></p>
+                            <p>{{ auth()->user()->about_me ?? '' }}</p>
+                            <p><a class="btn btn-primary" href="user/{{auth()->user()->id}}/edit">Edit My Profile</a></p>
                         </div>
+                        @if(file_exists('img/users/'.auth()->user()->id.'_large.jpg'))
                         <div class="col-md-3">
-                            <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ auth()->user()->name }}">
+                            <img class="img-thumbnail" src="/img/users/{{auth()->user()->id}}_large.jpg" alt="{{ auth()->user()->name }}">
                         </div>
+                            @endif
                     </div>
 
 
@@ -30,10 +33,13 @@
                     <ul class="list-group">
                         @foreach($hobbies as $hobby)
                             <li class="list-group-item">
-                                <a title="Show Details" href="/hobby/{{ $hobby->id }}">
-                                    <img src="/img/thumb_landscape.jpg" alt="thumb"></a>
-                                    {{ $hobby->name }}
-                                </a>
+                                @if(file_exists('img/hobbies/'.$hobby->id.'_thumbnail.jpg'))
+                                    <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                        <img src="/img/hobbies/{{$hobby->id}}_thumbnail.jpg" alt="Hobby Thumbnail">
+
+                                    </a>
+                                @endif
+                                &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->Hobby }}</a>
                                 @auth
                                     <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Edit Hobby</a>
                                 @endauth
